@@ -1,6 +1,5 @@
 ﻿using System;
 using Characters.Commons;
-using Damages;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -18,17 +17,20 @@ namespace Characters.Enemies
         IObservable<Vector2> ICharacterCore.OnMoveAsObservable()
         {
             return this.UpdateAsObservable()
+                .TakeUntil(OnDeadAsObservable())
                 .WithLatestFrom(enemyAi.MoveDirection, (_, v) => v);
         }
 
         IObservable<Vector2> ICharacterCore.OnRotateAsObservable()
         {
-            return enemyAi.TargetDirection;
+            return enemyAi.TargetDirection
+                .TakeUntil(OnDeadAsObservable());
         }
 
         IObservable<Vector2> ICharacterCore.OnFireAsObservable()
         {
             return this.UpdateAsObservable()
+                .TakeUntil(OnDeadAsObservable())
                 .WithLatestFrom(enemyAi.Fire, (_, b) => b)
                 .Where(b => b)
                 .WithLatestFrom(enemyAi.TargetDirection, (_, v) => v);
