@@ -11,6 +11,9 @@ namespace UI
         [SerializeField]
         TMP_Text text;
 
+        [SerializeField]
+        string format;
+
         [Inject]
         EnemyContainer enemyContainer;
 
@@ -24,7 +27,7 @@ namespace UI
 
         void UpdateText(int value)
         {
-            text.text = value.ToString();
+            text.text = value.ToString(format);
         }
     }
 }
