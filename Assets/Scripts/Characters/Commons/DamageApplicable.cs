@@ -24,7 +24,8 @@ namespace Characters.Commons
                 .Scan(0F, (x, y) => x + y)
                 .Select(x => _initialLife - x)
                 .Share();
-            _life.Subscribe(_ => _dead.OnNext(Unit.Default))
+            _life.Where(x => x <= 0)
+                .Subscribe(_ => _dead.OnNext(Unit.Default))
                 .AddTo(this);
         }
 
