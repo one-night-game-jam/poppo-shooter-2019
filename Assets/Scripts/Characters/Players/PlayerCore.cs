@@ -16,6 +16,10 @@ namespace Characters.Players
         [SerializeField]
         private float _initialLife;
         private IObservable<float> _life;
+
+        public IObservable<Unit> Dead => _dead;
+        private IObservable<Unit> _dead;
+
         private ISubject<float> _damage = new Subject<float>();
 
         private void Start()
@@ -26,6 +30,12 @@ namespace Characters.Players
                 .Select(x => _initialLife - x)
                 .Share();
             _life.Subscribe();
+
+            _dead = _life
+                .Select(x => x <= 0)
+                .AsUnitObservable()
+                .Share();
+            _dead.Subscribe(_ => Debug.Log("Dead!"));
         }
 
         IObservable<Vector2> ICharacterCore.OnMoveAsObservable()
