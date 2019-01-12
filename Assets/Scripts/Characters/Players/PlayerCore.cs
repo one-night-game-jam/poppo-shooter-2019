@@ -17,30 +17,27 @@ namespace Characters.Players
         private DamageApplicable _damageApplicable;
 
         Vector3 IReadOnlyPlayerCore.Position => transform.position;
-        IObservable<Unit> IReadOnlyPlayerCore.Dead => _damageApplicable.Dead;
-        IObservable<float> IReadOnlyPlayerCore.Life => _damageApplicable.Life.Select(x => x / _damageApplicable.InitialLife);
 
-        private void Start()
-        {
-            _damageApplicable.Dead
-                .Subscribe(_ => Debug.Log("Dead!"))
-                .AddTo(this);
-        }
+        public IObservable<Unit> Dead => _damageApplicable.Dead;
+        IObservable<float> IReadOnlyPlayerCore.Life => _damageApplicable.Life.Select(x => x / _damageApplicable.InitialLife);
 
         IObservable<Vector2> ICharacterCore.OnMoveAsObservable()
         {
             return this.UpdateAsObservable()
+                .TakeUntil(Dead)
                 .WithLatestFrom(inputEventProvider.MoveDirection, (_, v) => v);
         }
 
         IObservable<Vector2> ICharacterCore.OnRotateAsObservable()
         {
-            return inputEventProvider.TargetDirection;
+            return inputEventProvider.TargetDirection
+                .TakeUntil(Dead);
         }
 
         IObservable<Vector2> ICharacterCore.OnFireAsObservable()
         {
             return this.UpdateAsObservable()
+                .TakeUntil(Dead)
                 .WithLatestFrom(inputEventProvider.Fire, (_, b) => b)
                 .Where(b => b)
                 .WithLatestFrom(inputEventProvider.TargetDirection, (_, v) => v);

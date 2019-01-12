@@ -1,5 +1,5 @@
 ﻿using System;
-using Damages;
+using Characters.Commons;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -11,20 +11,26 @@ namespace Characters.Enemies
         [SerializeField]
         EnemyAI enemyAi;
 
+        [SerializeField]
+        DamageApplicable damageApplicable;
+
         IObservable<Vector2> ICharacterCore.OnMoveAsObservable()
         {
             return this.UpdateAsObservable()
+                .TakeUntil(OnDeadAsObservable())
                 .WithLatestFrom(enemyAi.MoveDirection, (_, v) => v);
         }
 
         IObservable<Vector2> ICharacterCore.OnRotateAsObservable()
         {
-            return enemyAi.TargetDirection;
+            return enemyAi.TargetDirection
+                .TakeUntil(OnDeadAsObservable());
         }
 
         IObservable<Vector2> ICharacterCore.OnFireAsObservable()
         {
             return this.UpdateAsObservable()
+                .TakeUntil(OnDeadAsObservable())
                 .WithLatestFrom(enemyAi.Fire, (_, b) => b)
                 .Where(b => b)
                 .WithLatestFrom(enemyAi.TargetDirection, (_, v) => v);
@@ -42,7 +48,7 @@ namespace Characters.Enemies
 
         public IObservable<Unit> OnDeadAsObservable()
         {
-            return Observable.Empty<Unit>();
+            return damageApplicable.Dead;
         }
     }
 }

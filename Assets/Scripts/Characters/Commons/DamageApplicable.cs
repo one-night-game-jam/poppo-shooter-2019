@@ -16,9 +16,9 @@ namespace Characters.Commons
         private Subject<float> _life = new Subject<float>();
 
         public IObservable<Unit> Dead => _dead;
-        private Subject<Unit> _dead = new Subject<Unit>();
+        private readonly ISubject<Unit> _dead = new AsyncSubject<Unit>();
 
-        private ISubject<float> _damage = new Subject<float>();
+        private readonly ISubject<float> _damage = new Subject<float>();
 
         private void Start()
         {
@@ -29,7 +29,12 @@ namespace Characters.Commons
                 .Subscribe(x => _life.OnNext(x))
                 .AddTo(this);
             _life.Where(x => x <= 0)
-                .Subscribe(_ => _dead.OnNext(Unit.Default))
+                .Take(1)
+                .Subscribe(_ =>
+                {
+                    _dead.OnNext(Unit.Default);
+                    _dead.OnCompleted();
+                })
                 .AddTo(this);
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Characters;
 using Characters.Enemies;
 using UniRx;
 using UnityEngine;
@@ -21,14 +22,19 @@ namespace Managers
         [SerializeField]
         float randomSphereSize;
 
-        readonly ReactiveCollection<EnemyCore> enemyCores = new ReactiveCollection<EnemyCore>();
-
         [Inject]
         IFactory<EnemyCore> enemyFactory;
+
+        [Inject]
+        IReadOnlyPlayerCore player;
+
+        [Inject]
+        EnemyContainer container;
 
         void Start()
         {
             Observable.Timer(TimeSpan.FromSeconds(dueTimeSeconds), TimeSpan.FromSeconds(periodSeconds))
+                .TakeUntil(player.Dead)
                 .Select(_ => 1)
                 .StartWith(0)
                 .Scan(0, (a, b) => a + b)
@@ -40,7 +46,7 @@ namespace Managers
         {
             foreach (var _ in Enumerable.Range(0, count))
             {
-                enemyCores.AddTo(CreateEnemy());
+                container.Add(CreateEnemy());
             }
         }
 

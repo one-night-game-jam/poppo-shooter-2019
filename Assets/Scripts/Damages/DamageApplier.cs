@@ -10,10 +10,14 @@ namespace Damages
 
         void OnTriggerEnter(Collider collider)
         {
+            bool shouldDestroy = false;
             foreach (var applicable in collider.GetComponents<IDamageApplicable>())
             {
                 applicable.ApplyDamage(_damage);
+                shouldDestroy = true;
             }
+
+            if (shouldDestroy) Destroy(gameObject);
         }
     }
 }

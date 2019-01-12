@@ -24,8 +24,9 @@ namespace Characters.Commons
                 .AddTo(this);
 
             characterCore.OnRotateAsObservable()
+                .Where(v => float.Epsilon < v.sqrMagnitude)
                 .ObserveOn(Scheduler.MainThreadFixedUpdate)
-                .Select(v => Quaternion.LookRotation(new Vector3(v.x, 0, v.y), Vector3.up))
+                .Select(v => Quaternion.LookRotation(new Vector3(v.x, 0, v.y)))
                 .Subscribe(Rotate)
                 .AddTo(this);
         }

@@ -33,10 +33,10 @@ namespace Characters.Enemies
         void Start()
         {
             Observable.Timer(TimeSpan.FromSeconds(dueTimeSeconds), TimeSpan.FromMilliseconds(updateLogicSpanMillis))
-                .TakeUntil(player.Dead)
                 .Select(_ => UpdateLogic())
                 .Switch()
                 .Finally(Stop)
+                .TakeUntil(player.Dead)
                 .Subscribe()
                 .AddTo(this);
         }

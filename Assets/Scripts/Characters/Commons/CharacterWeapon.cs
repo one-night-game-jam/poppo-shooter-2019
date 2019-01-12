@@ -20,6 +20,7 @@ namespace Characters.Commons
         {
             characterCore.OnFireAsObservable()
                 .ThrottleFirst(TimeSpan.FromMilliseconds(throttleMillis))
+                .Where(v => float.Epsilon < v.sqrMagnitude)
                 .Subscribe(Fire)
                 .AddTo(this);
 
