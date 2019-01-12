@@ -1,4 +1,5 @@
 ﻿using System;
+using Characters.Commons;
 using Damages;
 using UniRx;
 using UniRx.Triggers;
@@ -10,6 +11,9 @@ namespace Characters.Enemies
     {
         [SerializeField]
         EnemyAI enemyAi;
+
+        [SerializeField]
+        DamageApplicable damageApplicable;
 
         IObservable<Vector2> ICharacterCore.OnMoveAsObservable()
         {
@@ -42,7 +46,7 @@ namespace Characters.Enemies
 
         public IObservable<Unit> OnDeadAsObservable()
         {
-            return Observable.Empty<Unit>();
+            return damageApplicable.Dead;
         }
     }
 }

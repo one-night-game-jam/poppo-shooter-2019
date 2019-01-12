@@ -22,13 +22,14 @@ namespace Managers
         [SerializeField]
         float randomSphereSize;
 
-        readonly ReactiveCollection<EnemyCore> enemyCores = new ReactiveCollection<EnemyCore>();
-
         [Inject]
         IFactory<EnemyCore> enemyFactory;
 
         [Inject]
         IReadOnlyPlayerCore player;
+
+        [Inject]
+        EnemyContainer container;
 
         void Start()
         {
@@ -45,7 +46,7 @@ namespace Managers
         {
             foreach (var _ in Enumerable.Range(0, count))
             {
-                enemyCores.AddTo(CreateEnemy());
+                container.Add(CreateEnemy());
             }
         }
 

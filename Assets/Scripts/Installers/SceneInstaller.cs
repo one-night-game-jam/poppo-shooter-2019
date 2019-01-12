@@ -1,4 +1,5 @@
 using Characters.Enemies;
+using Managers;
 using UnityEngine;
 using Zenject;
 
@@ -11,5 +12,7 @@ public class SceneInstaller : MonoInstaller<SceneInstaller>
     {
         Container.BindIFactory<EnemyCore>()
             .FromComponentInNewPrefab(enemyPrefab);
+
+        Container.Bind<EnemyContainer>().AsSingle();
     }
 }

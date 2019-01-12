@@ -159,6 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyAi: {fileID: 1066590149852872743}
+  damageApplicable: {fileID: 6892257343139511496}
 --- !u!114 &1066590149852872743
 MonoBehaviour:
   m_ObjectHideFlags: 0
