@@ -4949,3 +4949,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playTimeMillis: 1000
   explode: {fileID: 2311593944162869858}
+  damageApplicable: {fileID: 5162724782272043187}

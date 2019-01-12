@@ -13,16 +13,16 @@ namespace Characters.Commons
         [SerializeField]
         ParticleSystem explode;
 
-        [Inject]
-        ICharacterCore characterCore;
+        [SerializeField]
+        DamageApplicable damageApplicable;
 
         private void Start()
         {
-            characterCore.OnDeadAsObservable()
+            damageApplicable.Dead
                 .Subscribe(_ => Explode())
                 .AddTo(this);
 
-            characterCore.OnDeadAsObservable()
+            damageApplicable.Dead
                 .Delay(TimeSpan.FromMilliseconds(playTimeMillis))
                 .Subscribe(_ => Destroy(this.gameObject))
                 .AddTo(this);

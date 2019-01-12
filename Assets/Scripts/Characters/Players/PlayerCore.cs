@@ -57,12 +57,6 @@ namespace Characters.Players
             return inputEventProvider.Boost
                 .Where(b => b)
                 .WithLatestFrom(inputEventProvider.TargetDirection, (_, v) => v);
-
-        }
-
-        IObservable<Unit> ICharacterCore.OnDeadAsObservable()
-        {
-            return _damageApplicable.Dead;
         }
     }
 }
