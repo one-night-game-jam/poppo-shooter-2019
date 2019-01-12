@@ -28,7 +28,7 @@ namespace Characters.Commons
                 .AddTo(this);
 
             _dead = _life
-                .Select(x => x <= 0)
+                .Where(x => x <= 0)
                 .AsUnitObservable()
                 .Share();
             _dead.Subscribe()
