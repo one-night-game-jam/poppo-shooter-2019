@@ -254,7 +254,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c958ca069f67b441d8aea62fd03cb38f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throttleMillis: 5000
+  throttleMillis: 50
+  power: 50
+  _rigidbody: {fileID: 1747626049492539366}
 --- !u!136 &2017312031
 CapsuleCollider:
   m_ObjectHideFlags: 0

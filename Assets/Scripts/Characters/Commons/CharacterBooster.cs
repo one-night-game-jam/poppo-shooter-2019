@@ -5,10 +5,17 @@ using Zenject;
 
 namespace Characters.Commons
 {
+    [RequireComponent(typeof(Rigidbody))]
     public class CharacterBooster : MonoBehaviour
     {
         [SerializeField]
         double throttleMillis;
+
+        [SerializeField]
+        float power;
+
+        [SerializeField]
+        Rigidbody _rigidbody;
 
         [Inject]
         ICharacterCore characterCore;
@@ -23,8 +30,7 @@ namespace Characters.Commons
 
         void Boost(Vector2 direction)
         {
-            // TODO: Implement
-            Debug.Log("Boost!");
+            _rigidbody.AddForce(new Vector3(direction.x, 0, direction.y).normalized * power, ForceMode.VelocityChange);
         }
     }
 }
