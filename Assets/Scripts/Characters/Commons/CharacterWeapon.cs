@@ -8,6 +8,9 @@ namespace Characters.Commons
     public class CharacterWeapon : MonoBehaviour
     {
         [SerializeField]
+        GameObject _bulletPrefab;
+
+        [SerializeField]
         double throttleMillis;
 
         [Inject]
@@ -27,8 +30,9 @@ namespace Characters.Commons
 
         void Fire(Vector2 direction)
         {
-            // TODO: Implement
-            Debug.Log("Fire!");
+            var rotation = Quaternion
+                .LookRotation(new Vector3(direction.x, 0, direction.y));
+            Instantiate(_bulletPrefab, this.transform.position, rotation);
         }
 
         void Reload()

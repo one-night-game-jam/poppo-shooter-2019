@@ -1,5 +1,63 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2707963044017714367
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7439708320957996671}
+  - component: {fileID: 5162724782272043187}
+  - component: {fileID: 2093788236454945867}
+  m_Layer: 9
+  m_Name: DamageApplicable
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7439708320957996671
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2707963044017714367}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2215509818189939414}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5162724782272043187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2707963044017714367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abed7197546904acdbccef671543e4bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!136 &2093788236454945867
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2707963044017714367}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4704804537533167808
 GameObject:
   m_ObjectHideFlags: 0
@@ -35,7 +93,9 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 3246206707595906543}
+  - {fileID: 7439708320957996671}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -51,6 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a46db0e1ab1b4a0dba7aabfcaec761e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _initialLife: 100
 --- !u!114 &5355946025128629158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,6 +205,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a76eb69dd30864ab090245054f19d1b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bulletPrefab: {fileID: 7663530954584797975, guid: b50071de82fa84a499e97c8332664c14,
+    type: 3}
   throttleMillis: 100
 --- !u!114 &1170924872564149386
 MonoBehaviour:
