@@ -9,6 +9,8 @@ namespace Characters.Enemies
     public class EnemyAI : MonoBehaviour
     {
         [SerializeField]
+        double dueTimeSeconds;
+        [SerializeField]
         double updateLogicSpanMillis;
         [SerializeField]
         Range targetDistance;
@@ -30,7 +32,7 @@ namespace Characters.Enemies
 
         void Start()
         {
-            Observable.Timer(TimeSpan.Zero, TimeSpan.FromMilliseconds(updateLogicSpanMillis))
+            Observable.Timer(TimeSpan.FromSeconds(dueTimeSeconds), TimeSpan.FromMilliseconds(updateLogicSpanMillis))
                 .TakeUntil(player.Dead)
                 .Select(_ => UpdateLogic())
                 .Switch()
