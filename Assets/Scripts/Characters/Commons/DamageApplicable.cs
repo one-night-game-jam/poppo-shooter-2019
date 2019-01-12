@@ -13,7 +13,7 @@ namespace Characters.Commons
         private IObservable<float> _life;
 
         public IObservable<Unit> Dead => _dead;
-        private IObservable<Unit> _dead;
+        private Subject<Unit> _dead = new Subject<Unit>();
 
         private ISubject<float> _damage = new Subject<float>();
 
@@ -24,14 +24,7 @@ namespace Characters.Commons
                 .Scan(0F, (x, y) => x + y)
                 .Select(x => _initialLife - x)
                 .Share();
-            _life.Subscribe()
-                .AddTo(this);
-
-            _dead = _life
-                .Where(x => x <= 0)
-                .AsUnitObservable()
-                .Share();
-            _dead.Subscribe()
+            _life.Subscribe(_ => _dead.OnNext(Unit.Default))
                 .AddTo(this);
         }
 
