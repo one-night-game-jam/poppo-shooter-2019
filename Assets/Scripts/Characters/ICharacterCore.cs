@@ -1,6 +1,7 @@
 ﻿using System;
 using UniRx;
 using Vector2 = UnityEngine.Vector2;
+using Damages;
 
 namespace Characters
 {
@@ -11,5 +12,6 @@ namespace Characters
         IObservable<Vector2> OnFireAsObservable();
         IObservable<Unit> OnReloadAsObservable();
         IObservable<Vector2> OnBoostAsObservable();
+        void ApplyDamage(Damage damage);
     }
 }
