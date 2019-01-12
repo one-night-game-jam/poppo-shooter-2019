@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Characters;
 using Characters.Enemies;
 using UniRx;
 using UnityEngine;
@@ -26,9 +27,13 @@ namespace Managers
         [Inject]
         IFactory<EnemyCore> enemyFactory;
 
+        [Inject]
+        IReadOnlyPlayerCore player;
+
         void Start()
         {
             Observable.Timer(TimeSpan.FromSeconds(dueTimeSeconds), TimeSpan.FromSeconds(periodSeconds))
+                .TakeUntil(player.Dead)
                 .Select(_ => 1)
                 .StartWith(0)
                 .Scan(0, (a, b) => a + b)
