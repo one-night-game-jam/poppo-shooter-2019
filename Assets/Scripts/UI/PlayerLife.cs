@@ -19,12 +19,14 @@ namespace UI
         {
             player.Life
                 .TakeUntil(player.Dead)
-                .Subscribe<float>(x =>
-                {
-                    var scale = bar.transform.localScale;
-                    scale.x = x;
-                    bar.transform.localScale = scale;
-                });
+                .Subscribe(UpdateBar, () => UpdateBar(0));
+        }
+
+        void UpdateBar(float value)
+        {
+            var scale = bar.transform.localScale;
+            scale.x = value;
+            bar.transform.localScale = scale;
         }
     }
 }
