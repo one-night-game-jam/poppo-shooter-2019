@@ -30,8 +30,8 @@ namespace Characters.Commons
 
         void Fire(Vector2 direction)
         {
-            var rotation = this.transform.rotation;
-            rotation.SetLookRotation(new Vector3(direction.x, 0, direction.y));
+            var rotation = Quaternion
+                .LookRotation(new Vector3(direction.x, 0, direction.y));
             Instantiate(_bulletPrefab, this.transform.position, rotation);
         }
 
