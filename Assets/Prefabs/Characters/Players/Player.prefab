@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 458661176178658077}
   - component: {fileID: 4919291564043248189}
   - component: {fileID: 1747626049492539366}
+  - component: {fileID: 6900294714828332275}
+  - component: {fileID: 1170924872564149386}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -111,3 +113,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 1
+--- !u!114 &6900294714828332275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4704804537533167808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a76eb69dd30864ab090245054f19d1b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  throttleMillis: 100
+--- !u!114 &1170924872564149386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4704804537533167808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c958ca069f67b441d8aea62fd03cb38f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  throttleMillis: 5000
