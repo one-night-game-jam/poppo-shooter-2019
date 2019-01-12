@@ -12,5 +12,6 @@ namespace Characters
         IObservable<Vector2> OnFireAsObservable();
         IObservable<Unit> OnReloadAsObservable();
         IObservable<Vector2> OnBoostAsObservable();
+        IObservable<Unit> OnDeadAsObservable();
     }
 }
