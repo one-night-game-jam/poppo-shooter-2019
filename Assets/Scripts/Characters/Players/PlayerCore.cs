@@ -18,6 +18,7 @@ namespace Characters.Players
 
         Vector3 IReadOnlyPlayerCore.Position => transform.position;
         IObservable<Unit> IReadOnlyPlayerCore.Dead => _damageApplicable.Dead;
+        IObservable<float> IReadOnlyPlayerCore.Life => _damageApplicable.Life.Select(x => x / _damageApplicable.InitialLife);
 
         private void Start()
         {
