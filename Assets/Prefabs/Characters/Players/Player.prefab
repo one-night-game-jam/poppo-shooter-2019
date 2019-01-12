@@ -30,7 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2215509818189939414}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5162724782272043187
 MonoBehaviour:
@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abed7197546904acdbccef671543e4bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _initialLife: 100
 --- !u!136 &2093788236454945867
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -94,7 +95,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 3246206707595906543}
   - {fileID: 7439708320957996671}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a46db0e1ab1b4a0dba7aabfcaec761e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _initialLife: 100
+  _damageApplicable: {fileID: 5162724782272043187}
 --- !u!114 &5355946025128629158
 MonoBehaviour:
   m_ObjectHideFlags: 0
