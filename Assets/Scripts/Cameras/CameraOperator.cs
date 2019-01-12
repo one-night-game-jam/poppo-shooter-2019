@@ -1,4 +1,5 @@
-﻿using Characters.Players;
+﻿using Characters;
+using Characters.Players;
 using UniRx;
 using UnityEngine;
 using Zenject;
@@ -8,14 +9,14 @@ namespace Cameras
     public class CameraOperator : MonoBehaviour
     {
         [Inject]
-        PlayerCore player;
+        IReadOnlyPlayerCore player;
 
         void Start()
         {
             var y = transform.position.y;
-            var diff = transform.position - player.transform.position;
-            player.transform.ObserveEveryValueChanged(t => t.position)
-                .TakeUntilDestroy(player.transform)
+            var diff = transform.position - player.Position;
+            player.ObserveEveryValueChanged(p => p.Position)
+                .TakeUntil(player.Dead)
                 .Select(p => p + diff)
                 .Select(p =>
                 {
