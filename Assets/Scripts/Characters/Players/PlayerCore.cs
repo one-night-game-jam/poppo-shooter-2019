@@ -4,18 +4,20 @@ using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 using Zenject;
-using Damages;
 using Characters.Commons;
 
 namespace Characters.Players
 {
-    public class PlayerCore : MonoBehaviour, ICharacterCore
+    public class PlayerCore : MonoBehaviour, ICharacterCore, IReadOnlyPlayerCore
     {
         [Inject]
         IInputEventProvider inputEventProvider;
 
         [SerializeField]
         private DamageApplicable _damageApplicable;
+
+        Vector3 IReadOnlyPlayerCore.Position => transform.position;
+        IObservable<Unit> IReadOnlyPlayerCore.Dead => _damageApplicable.Dead;
 
         private void Start()
         {
