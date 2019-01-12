@@ -640,14 +640,6 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 192400970, guid: 6be3a9ab2a6ae4f4899c120fdf0bd8f5, type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 192400970, guid: 6be3a9ab2a6ae4f4899c120fdf0bd8f5, type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6be3a9ab2a6ae4f4899c120fdf0bd8f5, type: 3}
 --- !u!1001 &1798991920375508083
@@ -799,11 +791,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 4704804537533167808, guid: 29ad259feac454c35a4d35f61deeb159,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2215509818189939414, guid: 29ad259feac454c35a4d35f61deeb159,
         type: 3}
