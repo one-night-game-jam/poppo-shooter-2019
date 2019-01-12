@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UniRx;
 
 namespace Bullets
 {
@@ -11,6 +12,17 @@ namespace Bullets
 
         [SerializeField]
         private float _speed;
+
+        [SerializeField]
+        private float _lifeTimeMilli;
+
+        private void Start()
+        {
+            Observable
+                .Timer(TimeSpan.FromMilliseconds(_lifeTimeMilli))
+                .Subscribe(_ => Destroy(this.gameObject))
+                .AddTo(this);
+        }
 
         private void FixedUpdate()
         {
