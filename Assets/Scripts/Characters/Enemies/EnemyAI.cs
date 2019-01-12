@@ -31,7 +31,7 @@ namespace Characters.Enemies
         void Start()
         {
             Observable.Timer(TimeSpan.Zero, TimeSpan.FromMilliseconds(updateLogicSpanMillis))
-                //.TakeUntil(player.Dead)
+                .TakeUntil(player.Dead)
                 .Select(_ => UpdateLogic())
                 .Switch()
                 .Finally(Stop)
@@ -64,7 +64,7 @@ namespace Characters.Enemies
 
         bool IsRotationCover()
         {
-            return targetRotationDotThreshold < Vector3.Dot(transform.forward,  player.Position - transform.position);
+            return targetRotationDotThreshold < Vector3.Dot(transform.forward, player.Position - transform.position);
         }
 
         IObservable<Unit> ShootState()
@@ -92,10 +92,10 @@ namespace Characters.Enemies
             return this.UpdateAsObservable()
                 .Do(_ =>
                 {
-                    var rot = Vector3.RotateTowards(transform.forward,  player.Position - transform.position,
+                    var rot = Vector3.RotateTowards(transform.forward, player.Position - transform.position,
                         rotateSpeed * Time.deltaTime, 0F);
-                        targetDirection.Value = new Vector2(rot.x, rot.z);
-                    });
+                    targetDirection.Value = new Vector2(rot.x, rot.z);
+                });
         }
 
         IObservable<Unit> MoveState()
