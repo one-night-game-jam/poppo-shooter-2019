@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7439708320957996671}
   - component: {fileID: 5162724782272043187}
   - component: {fileID: 2093788236454945867}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DamageApplicable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -205,6 +205,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a76eb69dd30864ab090245054f19d1b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bulletPrefab: {fileID: 7663530954584797975, guid: b50071de82fa84a499e97c8332664c14,
+    type: 3}
   throttleMillis: 100
 --- !u!114 &1170924872564149386
 MonoBehaviour:
