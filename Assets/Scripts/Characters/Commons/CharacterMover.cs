@@ -1,4 +1,5 @@
 ﻿using UniRx;
+using UniRx.Triggers;
 using UnityEngine;
 using Zenject;
 
@@ -23,10 +24,10 @@ namespace Characters.Commons
                 .Subscribe(Move)
                 .AddTo(this);
 
-            characterCore.OnRotateAsObservable()
-                .Where(v => float.Epsilon < v.sqrMagnitude)
-                .ObserveOn(Scheduler.MainThreadFixedUpdate)
-                .Select(v => Quaternion.LookRotation(new Vector3(v.x, 0, v.y)))
+            this.FixedUpdateAsObservable()
+                .WithLatestFrom(characterCore.OnRotateAsObservable()
+                    .Where(v => float.Epsilon < v.sqrMagnitude)
+                    .Select(v => Quaternion.LookRotation(new Vector3(v.x, 0, v.y))), (_, q) => q)
                 .Subscribe(Rotate)
                 .AddTo(this);
         }
