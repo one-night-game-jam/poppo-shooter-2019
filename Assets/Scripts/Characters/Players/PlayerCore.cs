@@ -15,11 +15,14 @@ namespace Characters.Players
 
         [SerializeField]
         private DamageApplicable _damageApplicable;
+        [SerializeField]
+        private CharacterBooster _booster;
 
         Vector3 IReadOnlyPlayerCore.Position => transform.position;
 
         public IObservable<Unit> Dead => _damageApplicable.Dead;
         IObservable<float> IReadOnlyPlayerCore.Life => _damageApplicable.Life.Select(x => x / _damageApplicable.InitialLife);
+        public IObservable<float> BoostReload => _booster.BoostReload;
 
         IObservable<Vector2> ICharacterCore.OnMoveAsObservable()
         {
@@ -50,7 +53,7 @@ namespace Characters.Players
                 .AsUnitObservable();
         }
 
-        IObservable<Vector2> ICharacterCore.OnBoostAsObservable()
+        public IObservable<Vector2> OnBoostAsObservable()
         {
             return inputEventProvider.Boost
                 .Where(b => b)
