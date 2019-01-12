@@ -1,6 +1,6 @@
 ﻿using Characters;
-using Characters.Players;
 using UniRx;
+using UniRx.Triggers;
 using UnityEngine;
 using Zenject;
 
@@ -15,15 +15,16 @@ namespace Cameras
         {
             var y = transform.position.y;
             var diff = transform.position - player.Position;
-            player.ObserveEveryValueChanged(p => p.Position)
+            var position = player.ObserveEveryValueChanged(p => p.Position)
                 .TakeUntil(player.Dead)
                 .Select(p => p + diff)
                 .Select(p =>
                 {
                     p.y = y;
                     return p;
-                })
-                .ObserveOn(Scheduler.MainThreadEndOfFrame)
+                });
+
+            this.LateUpdateAsObservable().WithLatestFrom(position, (_, p) => p)
                 .Subscribe(p => transform.position = p)
                 .AddTo(this);
         }
