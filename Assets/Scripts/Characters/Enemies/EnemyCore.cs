@@ -39,5 +39,10 @@ namespace Characters.Enemies
         {
             return Observable.Empty<Vector2>();
         }
+
+        public IObservable<Unit> OnDeadAsObservable()
+        {
+            return Observable.Empty<Unit>();
+        }
     }
 }

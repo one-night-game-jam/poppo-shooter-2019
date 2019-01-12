@@ -125,6 +125,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a65a195ec77b44a281c2dc8baae0a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  updateLogicSpanMillis: 100
+  targetDistance:
+    start: 3
+    length: 3
+  targetRotationDotThreshold: 0.9
+  rotateSpeed: 2
 --- !u!114 &5355946025128629158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,10 +327,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2215509818189939414}
     m_Modifications:
-    - target: {fileID: 100000, guid: 826c5e133c6da469f8d967ee1415f49b, type: 3}
-      propertyPath: m_Name
-      value: oni
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 826c5e133c6da469f8d967ee1415f49b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -380,6 +382,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 826c5e133c6da469f8d967ee1415f49b, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 826c5e133c6da469f8d967ee1415f49b, type: 3}
+      propertyPath: m_Name
+      value: oni
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 826c5e133c6da469f8d967ee1415f49b, type: 3}
       propertyPath: m_Materials.Array.data[0]
