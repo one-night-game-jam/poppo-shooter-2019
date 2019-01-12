@@ -43,7 +43,7 @@ namespace Characters.Players
                 .WithLatestFrom(inputEventProvider.TargetDirection, (_, v) => v);
         }
 
-        public IObservable<Unit> OnReloadAsObservable()
+        IObservable<Unit> ICharacterCore.OnReloadAsObservable()
         {
             return inputEventProvider.Reload
                 .Where(b => b)
@@ -56,6 +56,11 @@ namespace Characters.Players
                 .Where(b => b)
                 .WithLatestFrom(inputEventProvider.TargetDirection, (_, v) => v);
 
+        }
+
+        IObservable<Unit> ICharacterCore.OnDeadAsObservable()
+        {
+            return _damageApplicable.Dead;
         }
     }
 }
