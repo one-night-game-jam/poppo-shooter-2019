@@ -178,7 +178,7 @@ MonoBehaviour:
     start: 5
     length: 5
   targetRotationDotThreshold: 0.9
-  rotateSpeed: 2
+  rotateSpeed: 3
 --- !u!114 &5355946025128629158
 MonoBehaviour:
   m_ObjectHideFlags: 0
