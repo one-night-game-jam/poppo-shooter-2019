@@ -1,24 +1,49 @@
 ﻿using System;
+using Inputs;
+using UniRx;
+using UniRx.Triggers;
 using UnityEngine;
+using Zenject;
 
 namespace Characters.Players
 {
     public class PlayerCore : MonoBehaviour, ICharacterCore
     {
+        [Inject]
+        IInputEventProvider inputEventProvider;
 
-        public IObservable<Vector2> OnMoveAsObservable()
+        IObservable<Vector2> ICharacterCore.OnMoveAsObservable()
         {
-            throw new NotImplementedException();
+            return this.UpdateAsObservable()
+                .WithLatestFrom(inputEventProvider.MoveDirection, (_, v) => v);
         }
 
-        public IObservable<Vector2> OnFireAsObservable()
+        IObservable<Vector2> ICharacterCore.OnRotateAsObservable()
         {
-            throw new NotImplementedException();
+            return inputEventProvider.TargetDirection;
         }
 
-        public IObservable<Vector2> OnBoostAsObservable()
+        IObservable<Vector2> ICharacterCore.OnFireAsObservable()
         {
-            throw new NotImplementedException();
+            return this.UpdateAsObservable()
+                .WithLatestFrom(inputEventProvider.Fire, (_, b) => b)
+                .Where(b => b)
+                .WithLatestFrom(inputEventProvider.TargetDirection, (_, v) => v);
+        }
+
+        public IObservable<Unit> OnReloadAsObservable()
+        {
+            return inputEventProvider.Reload
+                .Where(b => b)
+                .AsUnitObservable();
+        }
+
+        IObservable<Vector2> ICharacterCore.OnBoostAsObservable()
+        {
+            return inputEventProvider.Boost
+                .Where(b => b)
+                .WithLatestFrom(inputEventProvider.TargetDirection, (_, v) => v);
+
         }
     }
 }
