@@ -29,13 +29,15 @@ namespace Characters.Players
                 .Scan(0F, (x, y) => x + y)
                 .Select(x => _initialLife - x)
                 .Share();
-            _life.Subscribe();
+            _life.Subscribe()
+                .AddTo(this);
 
             _dead = _life
                 .Select(x => x <= 0)
                 .AsUnitObservable()
                 .Share();
-            _dead.Subscribe(_ => Debug.Log("Dead!"));
+            _dead.Subscribe(_ => Debug.Log("Dead!"))
+                .AddTo(this);
         }
 
         IObservable<Vector2> ICharacterCore.OnMoveAsObservable()
