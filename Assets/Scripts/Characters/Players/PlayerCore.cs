@@ -17,7 +17,9 @@ namespace Characters.Players
         private DamageApplicable _damageApplicable;
 
         Vector3 IReadOnlyPlayerCore.Position => transform.position;
+
         public IObservable<Unit> Dead => _damageApplicable.Dead;
+        IObservable<float> IReadOnlyPlayerCore.Life => _damageApplicable.Life.Select(x => x / _damageApplicable.InitialLife);
 
         IObservable<Vector2> ICharacterCore.OnMoveAsObservable()
         {
