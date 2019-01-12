@@ -10,7 +10,10 @@ namespace Characters.Commons
     {
         [SerializeField]
         private float _initialLife;
-        private IObservable<float> _life;
+        public float InitialLife => _initialLife;
+
+        public IObservable<float> Life => _life;
+        private Subject<float> _life = new Subject<float>();
 
         public IObservable<Unit> Dead => _dead;
         private Subject<Unit> _dead = new Subject<Unit>();
@@ -19,11 +22,12 @@ namespace Characters.Commons
 
         private void Start()
         {
-            _life = _damage
+            _damage
                 .StartWith(0)
                 .Scan(0F, (x, y) => x + y)
                 .Select(x => _initialLife - x)
-                .Share();
+                .Subscribe(x => _life.OnNext(x))
+                .AddTo(this);
             _life.Where(x => x <= 0)
                 .Subscribe(_ => _dead.OnNext(Unit.Default))
                 .AddTo(this);
